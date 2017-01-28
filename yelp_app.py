@@ -18,7 +18,7 @@ def get_businesses(location, term):
     params = {
         'term': term,
         'lang': 'en',
-        'limit': 10
+        'limit': 5
     }
 
     response = client.search(location, **params)
@@ -29,7 +29,8 @@ def get_businesses(location, term):
         # print(business.name, business.rating, business.phone)
         businesses.append({"name": business.name,
             "rating": business.rating,
-            "phone": business.phone
+            "phone": business.phone,
+            "address": business.location.address
         })
 
     return businesses

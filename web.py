@@ -6,10 +6,12 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     address = request.values.get('address')
-    forecast = None
+    term = request.values.get('term')
     if address:
-        forecast = weather.get_weather(address)
-    return render_template('index.html', forecast=forecast)
+        businesses = yelp_app.get_businesses(address, term)
+    else:
+        businesses = []
+    return render_template('index.html', businesses=businesses)
 
 @app.route('/about')
 def about():
